@@ -27,3 +27,15 @@ test("Displays unlocked if locked is false", () => {
     const { getByText } = render(<Display locked={false} />);
     getByText(/unlocked/i);
 });
+
+test("red-led class if locked/closed", () => {
+    render(<Display locked={true} closed={true} />);
+    expect(document.getElementById("locked").classList.contains("red-led")).toBe(true);
+    expect(document.getElementById("closed").classList.contains("red-led")).toBe(true);
+});
+
+test("green-led class if unlocked/open", () => {
+    render(<Display locked={false} closed={false} />);
+    expect(document.getElementById("locked").classList.contains("green-led")).toBe(true);
+    expect(document.getElementById("closed").classList.contains("green-led")).toBe(true);
+});
