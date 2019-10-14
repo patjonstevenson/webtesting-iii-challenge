@@ -17,3 +17,13 @@ test("Displays open if closed is false", () => {
     const { getByText } = render(<Display closed={false} />);
     getByText(/open/i);
 });
+
+test("Displays locked if locked is true", () => {
+    const { getByText } = render(<Display locked={true} />);
+    getByText(/locked/i);
+});
+
+test("Displays unlocked if locked is false", () => {
+    const { getByText } = render(<Display locked={false} />);
+    getByText(/unlocked/i);
+});
