@@ -13,24 +13,12 @@ test("Gate defaults to unlocked and open", () => {
     expect(queryByText(/unlock gate/i)).toBeNull();
 })
 
-test("Gate cannot be opened if locked", () => {
 
-    const toggleClosedMock = jest.fn();
-    const { getByText } = render(<Controls locked={true} closed={true} toggleClosed={toggleClosedMock} />);
-
-    fireEvent.click(getByText(/open/i));
-    expect(toggleClosedMock).toHaveBeenCalledTimes(0);
-})
-
-test("Gate cannot be locked if open", () => {
-    const toggleLockedMock = jest.fn();
-
-    const { getByText } = render(<Controls locked={false} closed={false} toggleLocked={toggleLockedMock} />);
-
-    fireEvent.click(getByText(/lock/i));
-    expect(toggleLockedMock).toHaveBeenCalledTimes(0);
-})
 
 test("Shows the controls and display", () => {
-
+    const { getByText, getAllByText } = render(<Dashboard />);
+    // controls
+    getByText(/locked/);
+    // display
+    getAllByText(/gate/i);
 });
