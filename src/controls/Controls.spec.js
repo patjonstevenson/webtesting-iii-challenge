@@ -2,6 +2,7 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import Controls from "./Controls";
+import Dashboard from "../dashboard/Dashboard";
 
 test("Controls render without error", () => {
     render(<Controls />);
@@ -51,3 +52,17 @@ test("Gate cannot be locked if open", () => {
     fireEvent.click(getByText(/lock/i));
     expect(toggleLockedMock).toHaveBeenCalledTimes(0);
 })
+
+test("buttons' text changes to reflect the state of the the door", () => {
+    const { getByText } = render(
+        <Dashboard
+        />);
+    fireEvent.click(getByText(/close gate/i));
+    getByText(/closed/i);
+    fireEvent.click(getByText(/lock gate/i));
+    getByText(/locked/i);
+    fireEvent.click(getByText(/unlock gate/i));
+    getByText(/unlocked/i);
+    fireEvent.click(getByText(/open gate/i));
+    getByText(/open/i);
+});
